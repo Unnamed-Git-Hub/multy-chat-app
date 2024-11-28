@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiChat App</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .phone-frame {
+            width: 360px;
+            height: 640px;
+            background-color: #f0f0f0;
+            border: 10px solid #222;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            display: flex;
+            width: 300%; /* 100% por cada panel */
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+        .panel {
+            width: 100%;
+            height: 100%;
+            padding: 50px 10px 10px; /* Espacio para el encabezado */
+            box-sizing: border-box;
+            overflow-y: auto;
+            position: relative;
+        }
+        .header {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        .chat-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .chat-item {
+            background-color: white;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #telegram { background-color: #0088cc; }
+        #whatsapp { background-color: #25D366; }
+        #discord { background-color: #7289DA; }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 2;
+        }
+        #prev { left: 10px; }
+        #next { right: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <button class="nav-button" id="prev">&lt;</button>
+        <button class="nav-button" id="next">&gt;</button>
+        <div class="container" id="container">
+            <div class="panel" id="telegram">
+                <div class="header">Telegram</div>
+                <ul class="chat-list">
+                    <li class="chat-item">Juan: ¡Hola!</li>
+                    <li class="chat-item">María: ¿Cómo estás?</li>
+                    <li class="chat-item">Grupo Familia: ¡Nos vemos mañana!</li>
+                </ul>
+            </div>
+            <div class="panel" id="whatsapp">
+                <div class="header">WhatsApp</div>
+                <ul class="chat-list">
+                    <li class="chat-item">Ana: ¿Qué tal?</li>
+                    <li class="chat-item">Carlos: ¡Envía la foto!</li>
+                    <li class="chat-item">Trabajo: Reunión a las 3 PM</li>
+                </ul>
+            </div>
+            <div class="panel" id="discord">
+                <div class="header">Discord</div>
+                <ul class="chat-list">
+                    <li class="chat-item">Servidor Gaming: Nuevo evento hoy</li>
+                    <li class="chat-item">Amigos: ¿Jugamos?</li>
+                    <li class="chat-item">Proyecto: Actualización lista</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const totalPanels = 3;
+        const container = document.getElementById('container');
+
+        document.getElementById('prev').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlide();
+            }
+        });
+
+        document.getElementById('next').addEventListener('click', () => {
+            if (currentIndex < totalPanels - 1) {
+                currentIndex++;
+                updateSlide();
+            }
+        });
+
+        function updateSlide() {
+            container.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+    </script>
+
+</body>
+</html>
